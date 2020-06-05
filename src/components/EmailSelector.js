@@ -13,7 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
     FormControl: {
         margin: theme.spacing(1),
-        minWidth: 400,
+        // minWidth: 400,
     },
     formWrapper: {
         padding: theme.spacing(5, 0, 5)
@@ -37,10 +37,10 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.secondary.main
     },
     displayMessage: {
-        padding: theme.spacing(10)
+        padding: theme.spacing(10, 5, 10)
     },
     messageWrapper: {
-        padding: theme.spacing(5)
+        padding: theme.spacing(5, 0, 5)
     }
 }))
 
@@ -145,6 +145,7 @@ export default function EmailSelector() {
             <FormControl
                 className={classes.FormControl}
                 color="primary"
+                fullWidth={true}
             >
                 <InputLabel
                     variant="standard"
