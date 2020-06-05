@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/blm-mailer/static/css/main.25a90e20.chunk.css",
-    "main.js": "/blm-mailer/static/js/main.9ed3b4b8.chunk.js",
-    "main.js.map": "/blm-mailer/static/js/main.9ed3b4b8.chunk.js.map",
+    "main.js": "/blm-mailer/static/js/main.63d024d6.chunk.js",
+    "main.js.map": "/blm-mailer/static/js/main.63d024d6.chunk.js.map",
     "runtime-main.js": "/blm-mailer/static/js/runtime-main.41ae7b57.js",
     "runtime-main.js.map": "/blm-mailer/static/js/runtime-main.41ae7b57.js.map",
     "static/js/2.20b3b058.chunk.js": "/blm-mailer/static/js/2.20b3b058.chunk.js",
     "static/js/2.20b3b058.chunk.js.map": "/blm-mailer/static/js/2.20b3b058.chunk.js.map",
     "index.html": "/blm-mailer/index.html",
-    "precache-manifest.041597fc01ede55bb78e7308e6aae34a.js": "/blm-mailer/precache-manifest.041597fc01ede55bb78e7308e6aae34a.js",
+    "precache-manifest.9d611a0a8573ab097c5e9883fd659668.js": "/blm-mailer/precache-manifest.9d611a0a8573ab097c5e9883fd659668.js",
     "service-worker.js": "/blm-mailer/service-worker.js",
     "static/css/main.25a90e20.chunk.css.map": "/blm-mailer/static/css/main.25a90e20.chunk.css.map",
     "static/js/2.20b3b058.chunk.js.LICENSE.txt": "/blm-mailer/static/js/2.20b3b058.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.41ae7b57.js",
     "static/js/2.20b3b058.chunk.js",
     "static/css/main.25a90e20.chunk.css",
-    "static/js/main.9ed3b4b8.chunk.js"
+    "static/js/main.63d024d6.chunk.js"
   ]
 }
