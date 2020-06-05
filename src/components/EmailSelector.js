@@ -8,7 +8,6 @@ import {
     Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import ParseMessage from './ParseMessage';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -54,52 +53,44 @@ export default function EmailSelector() {
     const [renderStatus, setRenderStatus] = useState(false);
 
 
-    /* 
-    DESIRED FORMAT
     
-    Hello,
-
-    My name is [your name] and I am a resident of [city], WA. On Saturday May 30th at the Seattle protest, a young girl was pepper sprayed by one of your officers, Jared Campbell. It was recorded on video and currently is going viral. His badge number is 8470, which he has covered up during the protest. I am demanding that you look into his use of excessive force against a child.
-    
-    Regards,
-    [your name]
-
-    */
-
+    // TODO find auto way to break new line
+    // ! cannot exceeds email limit of 2083 characters
     var sample = [
         {
-            'sub': 'JENNY DURKAN NEEDS TO DO MORE',
-            'message': 'Fuck Jenny',
+            'email': 'tbwine@louisvilleprosecutor.com',
+            'sub': 'Justice for the Murder of Breonna Taylor',
+            'message': 'Hello, My name is [insert name]. I am a resident of [Washington/City] and I am emailing today to demand accountability for the racist murder of Breonna Taylor. I demand that charges be pressed against all officers involved in this heinous killing, including Sgt. Jonathan Mattingly and officers Brett Hankison and Myles Cosgrove. They should all be fired, and should be charged and prosecuted to the fullest extent of the law for murder. Breonna Taylor was an ER technician, working tirelessly to help others during this global pandemic. She should be alive today. She would be alive today if it were not for the gross abuse of power and white supremacy exhibited by the Louisville Police Department. All officers involved must face consequences for this murder in order to provide her family with justice and to deter law enforcement from committing racist and brutal acts of violence against communities of color. In addition, I demand that we provide more support for community efforts and organizations that work to prevent police brutality and violence. Sincerely, [your name]',
+            'raw': 'Hello,%0DMy name is [insert name]. I am a resident of [Washington/City] and I am emailing today to demand accountability for the racist murder of Breonna Taylor.%0DI demand that charges be pressed against all officers involved in this heinous killing, including Sgt. Jonathan Mattingly and officers Brett Hankison and Myles Cosgrove. They should all be fired, and should be charged and prosecuted to the fullest extent of the law for murder.%0DBreonna Taylor was an ER technician, working tirelessly to help others during this global pandemic. She should be alive today. She would be alive today if it were not for the gross abuse of power and white supremacy exhibited by the Louisville Police Department. All officers involved must face consequences for this murder in order to provide her family with justice and to deter law enforcement from committing racist and brutal acts of violence against communities of color.%0DIn addition, I demand that we provide more support for community efforts and organizations that work to prevent police brutality and violence. Sincerely, [your name]',
         },
         {
             'email': 'opa@seattle.gov',
-            'sub': 'CONDEMNING JARED CAMPBELL',
-            'message': 'Hello,%0DMy name is [your name] and I am a resident of [city], WA. On Saturday May 30th at the Seattle protest, a young girl was pepper sprayed by one of your officers, Jared Campbell. It was recorded on video and currently is going viral. His badge number is 8470, which he has covered up during the protest. I am demanding that you look into his use of excessive force against a child.%0DRegards,%0D[your name]'
-        },
-        {
-            'sub': 'RAISE REJECT REDMOND CURFEW',
-            'message': 'Fuck Curfew'
-        },
+            'sub': 'Jared Campbell Must Face Consequences',
+            'message': 'Hello, My name is [your name] and I am a resident of [city], WA. On Saturday May 30th at the Seattle protest, a young girl was pepper sprayed by one of your officers, Jared Campbell. It was recorded on video and currently is going viral. His badge number is 8470, which he has covered up during the protest. I am demanding that you look into his use of excessive force against a child. Regards,',
+            'raw': 'Hello,%0D%0DMy name is [your name] and I am a resident of [city], WA. On Saturday May 30th at the Seattle protest, a young girl was pepper sprayed by one of your officers, Jared Campbell. It was recorded on video and currently is going viral. His badge number is 8470, which he has covered up during the protest. I am demanding that you look into his use of excessive force against a child.%0D%0DRegards,%0D[your name]'
+        }
     ]
 
     // TODO Remove console.log
     const handleChange = (event) => {
-        console.log('event.target.value : ', event.target.value);
-        console.log('BEFORE SUBJECT NUM : ', subjectNum);
-        console.log('BEFORE SUBJECT : ', subject);
-        console.log('BEFORE MESSAGE : ', message);
+        // console.log('event.target.value : ', event.target.value);
+        // console.log('BEFORE SUBJECT NUM : ', subjectNum);
+        // console.log('BEFORE SUBJECT : ', subject);
+        // console.log('BEFORE MESSAGE : ', message);
 
         setSubjectNum(event.target.value);
-        setSubject(sample[event.target.value].sub)
-        setMessage(sample[event.target.value].message)
+        setSubject(sample[event.target.value].sub);
+        setMessage(sample[event.target.value].message);
+        // setRaw(sample[event.target.value].raw);
         setRenderStatus(true);
 
-        console.log('------------------------')
+        // console.log('------------------------')
     }
 
     useEffect(() => {
-        console.log("UPDATED SUBJECT : ", subject);
-        console.log("UPDATED MESSAGE : ", message);
+        // console.log("UPDATED SUBJECT : ", subject);
+        // console.log("UPDATED MESSAGE : ", message);
+        ExecuteOpenMailer();
     })
 
     function DisplayMessage() {
@@ -118,6 +109,31 @@ export default function EmailSelector() {
             </div>
         )
     }
+
+    function ParseMessage() {
+        // let starter = sample[1].raw;
+        let starter = sample[subjectNum].raw;
+        // console.log(starter);
+        let parsed = starter.replace(/ /g, '%20');
+        // console.log(parsed)
+        return parsed;
+    }
+
+    function ParseSubject() {
+        let starter = sample[subjectNum].sub;
+        let parsed = starter.replace(/ /g, '%20');
+        return parsed;
+    }
+
+    function ExecuteOpenMailer() {
+        if (subjectNum !== '') {
+            let htmlEmail = ParseMessage();
+            let sub = ParseSubject();
+            let address = sample[subjectNum].email;
+            window.location.href = "mailto:" + address + "?subject=" + sub + "&body=" + htmlEmail;
+        }
+    }
+
 
     return (
         <React.Fragment>
@@ -145,9 +161,8 @@ export default function EmailSelector() {
                     onChange={handleChange}
                     className={classes.select}
                 >
-                    <MenuItem value={0}>JENNY DURKAN NEEDS TO DO MORE</MenuItem>
+                    <MenuItem value={0}>THE MURDER OF BREONNA TAYLOR</MenuItem>
                     <MenuItem value={1}>CONDEMNING JARED CAMPBELL</MenuItem>
-                    <MenuItem value={2}>RAISE REJECT REDMOND CURFEW</MenuItem>
                 </Select>
             </FormControl>
             <Container className={classes.displayMessage}>
