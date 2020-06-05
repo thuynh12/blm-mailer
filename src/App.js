@@ -4,6 +4,7 @@ import { Container, Typography } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 import EmailSelector from './components/EmailSelector';
+import ParseMessage from './components/ParseMessage';
 
 function Mailing() {
   const space = "%20";
@@ -27,6 +28,8 @@ let customTheme = createMuiTheme({
   
 })
 
+customTheme = responsiveFontSizes(customTheme);
+
 function App() {
   return (
     <ThemeProvider theme={customTheme}>
@@ -48,6 +51,7 @@ function App() {
               </Typography>
             </Container>
             <EmailSelector />
+            <ParseMessage />
             {/* {Mailing()}  */}
           </div>
         </header>

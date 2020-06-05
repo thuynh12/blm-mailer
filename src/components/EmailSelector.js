@@ -8,6 +8,8 @@ import {
     Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import ParseMessage from './ParseMessage';
+
 
 const useStyles = makeStyles((theme) => ({
     FormControl: {
@@ -51,10 +53,33 @@ export default function EmailSelector() {
     const [message, setMessage] = useState('');
     const [renderStatus, setRenderStatus] = useState(false);
 
+
+    /* 
+    DESIRED FORMAT
+    
+    Hello,
+
+    My name is [your name] and I am a resident of [city], WA. On Saturday May 30th at the Seattle protest, a young girl was pepper sprayed by one of your officers, Jared Campbell. It was recorded on video and currently is going viral. His badge number is 8470, which he has covered up during the protest. I am demanding that you look into his use of excessive force against a child.
+    
+    Regards,
+    [your name]
+
+    */
+
     var sample = [
-        { 'sub': 'JENNY DURKAN NEEDS TO DO MORE', 'message': 'Fuck Jenny' },
-        { 'sub': 'CONDEMNING JARED CAMPBELL', 'message': 'Fuck Jared' },
-        { 'sub': 'RAISE REJECT REDMOND CURFEW', 'message': 'Fuck Curfew' },
+        {
+            'sub': 'JENNY DURKAN NEEDS TO DO MORE',
+            'message': 'Fuck Jenny',
+        },
+        {
+            'email': 'opa@seattle.gov',
+            'sub': 'CONDEMNING JARED CAMPBELL',
+            'message': 'Hello,%0DMy name is [your name] and I am a resident of [city], WA. On Saturday May 30th at the Seattle protest, a young girl was pepper sprayed by one of your officers, Jared Campbell. It was recorded on video and currently is going viral. His badge number is 8470, which he has covered up during the protest. I am demanding that you look into his use of excessive force against a child.%0DRegards,%0D[your name]'
+        },
+        {
+            'sub': 'RAISE REJECT REDMOND CURFEW',
+            'message': 'Fuck Curfew'
+        },
     ]
 
     // TODO Remove console.log
@@ -82,7 +107,7 @@ export default function EmailSelector() {
             <div>
                 <div>
                     <Typography variant="h4" color="secondary">
-                        Subject: <span style={{ color: 'white'}}>{subject}</span>
+                        Subject: <span style={{ color: 'white' }}>{subject}</span>
                     </Typography>
                 </div>
                 <div className={classes.messageWrapper}>
